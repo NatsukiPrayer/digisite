@@ -1,0 +1,27 @@
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'vote' question.id %}" method="post">
+{% csrf_token %}
+<tr>
+<td>
+<img src="C:\digisite\digisite\static\images\sinii.jpg">
+</td>
+<td>
+<img src="C:\digisite\digisite\static\images\krasnii.jpg">
+</td>
+<td>
+<img src="C:\digisite\digisite\static\images\jeltii.jpg">
+</td>
+</tr>
+<tr>
+{% for choice in question.choice_set.all %}
+<td style="text-align:center">
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+</td>
+{% endfor %}
+</tr>
+<input type="submit" value="firstdigi">
+</form>

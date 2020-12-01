@@ -1,0 +1,137 @@
+/* The sidebar menu */
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+  border-right: 2px solid;
+  border-left-color: black;
+  background: rgb(119,225,249);
+  background: linear-gradient(0deg, rgba(119,225,249,1) 0%, rgba(46,108,245,1) 100%, rgba(9,9,121,1) 100%);
+  border-bottom: 2px solid;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-family: Georgia,Times,Times New Roman,serif; 
+  font-size: 20px;
+  color: black;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: pink;
+}
+
+/* Style page content */
+.main {
+  font-family: Georgia,Times,Times New Roman,serif; 
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.header {
+  font-family: Georgia,Times,Times New Roman,serif; 
+  height: 50%;
+  text-align: left;
+  background: #2C6EF6;
+  color: black;
+  font-size: 20px;
+  border-bottom: 2px solid;
+  margin-left: 160px;
+}
+.header_text {
+  margin-left: 8px;
+  margin-top: 25px;
+}
+
+ body {
+ background-image: url('/static/images/bg.jpg')
+}
+
+ img {
+  border: 2px solid black;
+}
+
+ p {
+  font-family: Georgia,Times,Times New Roman,serif;  
+}
+
+.hide, .hide + label ~ div {
+    display: none; 
+}
+.hide + label,
+.hide:checked + label {
+    padding: 0;
+    color: black;
+    white-space: nowrap;
+    cursor: pointer;
+    border-bottom: 1px dotted black;
+}
+/* вид текста label при активном переключателе */
+.hide:checked + label {
+    color: blue;
+    border-bottom: 0;
+}
+/* когда чекбокс активен показываем блоки с содержанием  */
+.hide:checked + label + div {
+    display: block; 
+    background: #efefef;
+    -moz-box-shadow: inset 3px 3px 10px #7d8e8f;
+    -webkit-box-shadow: inset 3px 3px 10px #7d8e8f;
+    box-shadow: inset 3px 3px 10px #7d8e8f;
+    padding: 10px; 
+    max-width: 240px;
+ }
+ 
+ /* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: lightgreen;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit/register button */
+.registerbtn {
+  background-color: lightblue;
+  color: black;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity:1;
+}
+
+

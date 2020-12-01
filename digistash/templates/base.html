@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Digipocket</title>
+    </head>
+    <body>
+         <div class="bg-image"></div>
+         <div class="header">
+             <div class="header_text">
+                  <p>Welcome, User!</p>
+             </div>
+        </div>
+        <div class="sidenav">
+          <img src="{% static "images/logo.jpg" %}" alt="Digipocket" >
+          <a href="#">All digimons</a>
+          <a href="#">Acquiarable digimons</a>
+          <a href="#">My digimons</a>
+        </div>
+        <div id = "content">
+            {% block "content" %}
+            
+            {% endblock %}
+        </div>
+    </body>
+</html>
