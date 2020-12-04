@@ -1,10 +1,13 @@
 
-from django.template import loader
 from django.http import Http404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.template import loader
 from django.urls import reverse
 from .models import Question, Choice
+from django.contrib.auth.models import User
+
+
 
 def index(request):
     latest_question_list = Question.objects.order_by('-id')[:5]
@@ -42,3 +45,4 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('digistash:results', args=(question.id,)))
+#def registration(request):
