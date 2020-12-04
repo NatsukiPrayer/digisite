@@ -139,4 +139,9 @@ hr {
     text-align: center;
     margin-left: 160px;
 }
-
+.error_message{
+    text-align: left;
+    margin-left: 160px;
+    font-size: large;
+    color: red;
+}
