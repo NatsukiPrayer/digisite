@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block "content" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}"/>
+<div class="main">
+<table>
+<tr>
+<td>
+<img src="{% static "images/sinii1.jpg" %}" alt="DemiVeemon" >
+</td>
+<td>
+<img src="{% static "images/krasnii1.jpg" %}" alt="Gigimon" >
+</td>
+<td>
+<img src="{% static "images/jeltii2.jpg" %}" alt="Tsunomon" >
+</td>
+</tr>
+<tr>
+
+{% for choice in question.choice_set.all %}
+<td style="text-align:center">
+    <div style="border:1px solid black">
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+    </div>
+</td>
+{% endfor %}
+
+</tr>
+<tr>
+    <td style="text-align:center">
+        <input class="hide" id="hd-1" type="checkbox" >
+        <label for="hd-1">Click to know more</label>
+        <div>DemiVeemon is a Baby Dragon Digimon. Unusually for an In-Training Digimon, it possesses a body, hands, and feet, and so is able to grip objects with both of its small hands, and move while hopping about with both feet. As it is very voracious, it especially likes sweet foods. Also, as it is very fond of sleeping, if you take your eyes off of it, it will instantly fall asleep.
+        </div>
+    </td>
+    <td style="text-align:center;">
+        <input class="hide" id="hd-2" type="checkbox" >
+        <label for="hd-2">Click to know more</label>
+        <div>Gigimon is a Lesser Digimon. Its physical features resemble those of Tokomon, and there are powerful fangs growing within its mouth. However, unlike Tokomon, who digivolves into the Mammal-species, Gigimon, who digivolves into the Dragon-species, has a rough personality, and is ferocious despite its small size. There are more than a few even larger Digimon that were deceived by its appearance and suffered a counterattack.
+        </div>
+    </td>
+    <td style="text-align:center">
+        <input class="hide" id="hd-3" type="checkbox" >
+        <label for="hd-3">Click to know more</label>
+         <div>Tsunomon is a Lesser Digimon. It is a tiny Digimon that hardened one of the feelers on its head. From Punimon, it has accomplished a more animal-like Digivolution, and is covered in tufty body hair. It is still at the peak of playfulness, and it has a prank-loving personality, but its combat instinct has not awakened.
+         </div> 
+    </td>
+</tr>
+<tr>
+    <td>
+    </td>
+    <td style="text-align:center">
+        <input type="submit" value="Choose">
+    </td>
+</tr>
+</table>
+</form>
+</div>
+{% endblock %}

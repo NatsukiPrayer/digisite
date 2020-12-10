@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'digistash.apps.DigistashConfig'
+    'digistash.apps.DigistashConfig',
+    'registration.apps.RegistrationConfig',
 ]
 
 MIDDLEWARE = [

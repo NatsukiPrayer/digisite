@@ -9,7 +9,11 @@
          <div class="bg-image"></div>
          <div class="header">
              <div class="header_text">
-                  <p>Welcome, User!</p>
+                 {% if user.is_authenticated %}
+                  <p>Welcome, {{user.name}}!</p>
+                 {% else %}
+                  <p>Welcome, UnknownUser!</p>
+                 {% endif %}
              </div>
         </div>
         <div class="sidenav">

@@ -7,9 +7,6 @@ from django.urls import reverse
 
 from .models import Question, Choice
 
-
-
-
 def index(request):
     latest_question_list = Question.objects.order_by('-id')[:5]
     template = loader.get_template('digistash/index.html')
