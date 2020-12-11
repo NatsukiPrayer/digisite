@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from registration.models import Profile
 
 def auth(request):
@@ -9,10 +9,9 @@ def auth(request):
         psw = request.POST['psw']
         name = request.POST['name']
         user = authenticate(username=name, password=psw)
-        print(User.objects.all())
         if user is not None:
+            login(request, user)
             match_prof = Profile.objects.get(user=user)
-            print(match_prof.check_digi())
             if match_prof.check_digi():
                 pass
             else:

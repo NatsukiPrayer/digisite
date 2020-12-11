@@ -10,7 +10,7 @@
          <div class="header">
              <div class="header_text">
                  {% if user.is_authenticated %}
-                  <p>Welcome, {{ user.get_username }}!</p>
+                  <p>Welcome, {{user.name}}!</p>
                  {% else %}
                   <p>Welcome, UnknownUser!</p>
                  {% endif %}
