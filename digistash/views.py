@@ -54,6 +54,6 @@ def vote(request, question_id):
         # user hits the Back button.
         return redirect('/digistash/all_digi', request)
 def all_digi(request):
-    return render(request, 'digistash/all_digi.html')
+    return render(request, 'digistash/all_digi.html', {'digimons':Digimon.objects.all()})
 
 

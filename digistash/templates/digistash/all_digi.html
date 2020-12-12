@@ -3,8 +3,26 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}"/>
 <div class="main">
+{% if error_msg  %}
+    <p>Sosi</p>
+{% endif %}
 <table>
-<p>Soon there will be something</p>
-</form>
+    {% for digimon in digimons %}
+        <tr>
+            <td style="text-align:center">
+                {% with digimon.image_name as image_static %}
+                    <img src="{% static image_static %}" alt=digimon.name >
+                {% endwith %}
+            </td>
+            <td>
+                <input class="hide" id={{ digimon.name }} type="checkbox" >
+                <label for={{ digimon.name }}>Click to know more</label>
+                {% with digimon.description as description %}
+                <div>{{ description }}</div>
+                 {% endwith %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
 </div>
 {% endblock %}
