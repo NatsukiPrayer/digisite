@@ -4,7 +4,7 @@ from digistash.models import Digimon
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    digimons = models.ManyToManyField(Digimon, blank=True, null=True)
+    digimons = models.ManyToManyField(Digimon, blank=True)
     money = models.IntegerField(default=999)
     meat = models.IntegerField(default=999)
     @classmethod
@@ -14,4 +14,10 @@ class Profile(models.Model):
         return prof
     def check_digi(self):
         print(self.digimons)
-        return self.digimons is None
+        if self.digimons.all():
+            return True
+        else:
+            return False
+
+    def __str__(self):
+        return self.user.username

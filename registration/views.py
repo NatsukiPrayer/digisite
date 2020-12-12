@@ -13,7 +13,7 @@ def auth(request):
             login(request, user)
             match_prof = Profile.objects.get(user=user)
             if match_prof.check_digi():
-                pass
+                return redirect('/digistash/all_digi/', request)
             else:
                 return redirect( '/digistash/1/vote/', {request, 1})
         else:

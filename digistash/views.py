@@ -1,8 +1,10 @@
 
 from django.http import Http404
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.template import loader
+from registration.models import Profile
+from digistash.models import Digimon
 from django.urls import reverse
 
 from .models import Question, Choice
@@ -37,11 +39,21 @@ def vote(request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
+        print(request.user)
+        digi = Digimon.objects.get(name=selected_choice)
+        print(digi)
+        prof = Profile.objects.get(user=request.user)
+        prof.digimons.add(digi)
+        prof.save()
+        print(prof.digimons.all())
+        print(prof.check_digi())
         selected_choice.votes += 1
         selected_choice.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('digistash:results', args=(question.id,)))
+        return redirect('/digistash/all_digi', request)
+def all_digi(request):
+    return render(request, 'digistash/all_digi.html')
 
 
