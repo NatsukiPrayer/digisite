@@ -35,7 +35,7 @@ def registration(request):
             except User.DoesNotExist:
                 user = User.objects.create_user(name, email, psw)
                 user.save()
-                prof = Profile.create(user=match, money=999, meat=999)
+                prof = Profile.create(user=user, money=999, meat=999)
                 prof.save()
                 return redirect( '/registration/login/', {request, 1})
             else:
