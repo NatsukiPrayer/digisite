@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block "content" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "css/acq_digi.css" %}"/>
+<div class="main">
+<div class="error_message">
+{% if er_msg %} <p><strong>{{ er_msg }}</strong></p>{% endif %}
+</div>
+<div class="succsess_mesage">
+{% if sc_msg %} <p><strong>{{ sc_msg }}</strong></p>{% endif %}
+</div>
+<form action="" method="post">
+{% csrf_token %}
+<table>
+    <tr>
+        {% for digimon in digimons %}
+            <td style="text-align:center">
+                {% with digimon.image_name as image_static %}
+                    <img src="{% static image_static %}" alt=digimon.name >
+                {% endwith %}
+            </td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for digimon in digimons %}
+            <td style="text-align:center">
+               <input class="hide" id={{ digimon.name }} type="checkbox" >
+                <label for={{ digimon.name }}>Click to know more</label>
+                {% with digimon.description as description %}
+                <div>
+                    {{ digimon.name }}<br>
+                    {{ description }}
+                    {% if digimon.evolution %}
+                        <p>Evolves to {{ digimon.evolution }}</p>
+                    {% else %}
+                        <p>Not evolve</p>
+                    {% endif %}
+                    <p>Level: {{ digimon.level }}</p>
+                    <p>Type: {{ digimon.type }}</p>
+                    <p>Attribute: {{ digimon.attribute }}</p>
+                    <p>Attacks: {{ digimon.Attacks }}</p>
+                </div>
+                 {% endwith %}
+            </td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for digimon in digimons %}
+            <td style="text-align:center">
+                {% if digimon.evolution %}
+                    <input type="submit" name="{{ digimon.name }}" id="{{ digimon.name }}" value="Evolve to {{ digimon.evolution }}">
+                {% endif %}
+            </td>
+        {% endfor %}
+    </tr>
+</table>
+</form>
+</div>
+{% endblock %}

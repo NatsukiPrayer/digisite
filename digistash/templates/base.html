@@ -7,20 +7,25 @@
     </head>
     <body>
          <div class="bg-image"></div>
-         <div class="header">
-             <div class="header_text">
-                 {% if user.is_authenticated %}
-                  <p>Welcome, {{ user.get_username }}!</p>
-                 {% else %}
-                  <p>Welcome, UnknownUser!</p>
-                 {% endif %}
-             </div>
-        </div>
+             <div class="header">
+                         <div class="header_text">
+                             {% if user.is_authenticated %}
+                              <p>Welcome, {{ user.get_username }}!</p>
+                             {% else %}
+                              <p>Welcome, UnknownUser!</p>
+                             {% endif %}
+                         </div>
+            </div>
         <div class="sidenav">
           <img src="{% static "images/logo.jpg" %}" alt="Digipocket" >
           <a href="/digistash/all_digi/">All digimons</a>
           <a href="/digistash/acq_digi/">Acquiarable digimons</a>
-          <a href="#">My digimons</a>
+          <a href="/digistash/my_digi/">My digimons</a>
+            {% if request.user.is_authenticated %}
+                                <a href="/registration/logout">Logout</a>
+                             {% else %}
+                                 <a href="/registration/login">Login</a>
+                             {% endif %}
         </div>
         <div id = "content">
             {% block "content" %}

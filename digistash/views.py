@@ -71,6 +71,8 @@ def acq_digi(request):
         print(digi)
         prof = Profile.objects.get(user=request.user)
         if prof.money>=digi.money_to_evolve and prof.meat>=digi.meat_to_evolve:
+            prof.money-=5
+            prof.money -= 5
             prof.digimons.add(digi)
             prof.save()
             return render(request, 'digistash/acq_digi.html',
@@ -90,6 +92,28 @@ def acq_digi(request):
         return render(request, 'digistash/acq_digi.html',
                       {'usersDigi': Profile.objects.get(user=request.user).digi_list(),
                        'quest': ['DemiVeemon', 'Gigimon', 'Tsunomon']})
-
-
+def my_digi(request):
+    if request.method == 'POST':
+        loggedUser = Profile.objects.get(user=request.user)
+        for digimon in loggedUser.digi_list():
+            if request.POST.get(digimon):
+                evolving = request.POST[digimon]
+                af_evolving = evolving.replace('Evolve to ', '')
+                bf_evolving = digimon
+        dg = Digimon.objects.get(name=bf_evolving)
+        if loggedUser.meat>=dg.meat_to_evolve and loggedUser.money>=dg.money_to_evolve:
+            loggedUser.money-=dg.money_to_evolve
+            loggedUser.meat -= dg.meat_to_evolve
+            loggedUser.digimons.remove(Digimon.objects.get(name=bf_evolving))
+            loggedUser.digimons.add(Digimon.objects.get(name=af_evolving))
+            loggedUser.save()
+            return render(request, 'digistash/my_digi.html',
+                          {'digimons': Profile.objects.get(user=request.user).digimons.all(),
+                           'sc_msg':'Successfully evolved!'})
+        else:
+            return render(request, 'digistash/my_digi.html',
+                          {'digimons': Profile.objects.get(user=request.user).digimons.all(),
+                           'er_msg':"You don't have enough money or meat to evolve!" })
+    return render(request, 'digistash/my_digi.html',
+                  {'digimons': Profile.objects.get(user=request.user).digimons.all(),})
 

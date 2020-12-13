@@ -3,6 +3,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from registration.models import Profile
+from django.contrib.auth import logout
+from django.shortcuts import HttpResponseRedirect
 
 def auth(request):
     if request.method == 'POST':
@@ -47,4 +49,7 @@ def registration(request):
                 'error_message': "This email is already exist",
             })
     return render(request, 'registration/registration.html', {})
+def loggout(request):
+    logout(request)
+    return redirect( '/registration/login/', request)
 # Create your views here.

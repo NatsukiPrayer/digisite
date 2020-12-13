@@ -13,4 +13,5 @@ urlpatterns = [
     path('<int:question_id>/vote/', views.vote, name='vote'),
     path('all_digi/', views.all_digi, name='all_digi'),
     path('acq_digi/', views.acq_digi, name='acq_digi'),
+    path('my_digi/', views.my_digi, name='my_digi'),
 ]
