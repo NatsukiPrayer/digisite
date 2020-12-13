@@ -7,6 +7,9 @@ class Profile(models.Model):
     digimons = models.ManyToManyField(Digimon, blank=True)
     money = models.IntegerField(default=999)
     meat = models.IntegerField(default=999)
+    haveV = models.BooleanField(default=False)
+    haveG = models.BooleanField(default=False)
+    haveT = models.BooleanField(default=False)
     @classmethod
     def create(cls, user, money, meat):
         prof = cls(user=user, money=money, meat=meat)

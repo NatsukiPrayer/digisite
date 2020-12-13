@@ -44,6 +44,12 @@ def vote(request, question_id):
         print(digi)
         prof = Profile.objects.get(user=request.user)
         prof.digimons.add(digi)
+        if digi.name == 'Tsunomon':
+            prof.haveT = True
+        if digi.name == 'Gigimon':
+            prof.haveG = True
+        if digi.name == 'DemiVeemon':
+            prof.haveV = True
         prof.save()
         print(prof.digimons.all())
         print(prof.check_digi())
@@ -61,7 +67,10 @@ def acq_digi(request):
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
         return render(request, 'digistash/acq_digi.html', {'usersDigi':Profile.objects.get(user=request.user).digi_list(),
-                                                        'quest':['DemiVeemon', 'Gigimon', 'Tsunomon']})
+                                                        'quest':['DemiVeemon', 'Gigimon', 'Tsunomon'],
+                                                           'haveT':Profile.objects.get(user=request.user).haveT,
+                                                           'haveG':Profile.objects.get(user=request.user).haveG,
+                                                           'haveV':Profile.objects.get(user=request.user).haveV,})
     else:
         print(request.user)
         print(selected_choice)
@@ -74,16 +83,26 @@ def acq_digi(request):
             prof.money-=5
             prof.money -= 5
             prof.digimons.add(digi)
+            if digi.name == 'Tsunomon':
+                prof.haveT = True
+            if digi.name == 'Gigimon':
+                prof.haveG = True
+            if digi.name == 'DemiVeemon':
+                prof.haveV = True
             prof.save()
             return render(request, 'digistash/acq_digi.html',
                           {'usersDigi': Profile.objects.get(user=request.user).digi_list(),
                            'quest': ['DemiVeemon', 'Gigimon', 'Tsunomon'],
-                           'sc_msg': "Succsess!"})
+                           'sc_msg': "Succsess!", 'haveT':Profile.objects.get(user=request.user).haveT,
+                                                           'haveG':Profile.objects.get(user=request.user).haveG,
+                                                           'haveV':Profile.objects.get(user=request.user).haveV,})
         else:
             return render(request, 'digistash/acq_digi.html',
                           {'usersDigi': Profile.objects.get(user=request.user).digi_list(),
                            'quest': ['DemiVeemon', 'Gigimon', 'Tsunomon'],
-                           'er_msg': "You don't have enough money or meat!"})
+                           'er_msg': "You don't have enough money or meat!", 'haveT':Profile.objects.get(user=request.user).haveT,
+                                                           'haveG':Profile.objects.get(user=request.user).haveG,
+                                                           'haveV':Profile.objects.get(user=request.user).haveV,})
         print(prof.digimons.all())
         print(prof.check_digi())
         # Always return an HttpResponseRedirect after successfully dealing
@@ -91,7 +110,9 @@ def acq_digi(request):
         # user hits the Back button.
         return render(request, 'digistash/acq_digi.html',
                       {'usersDigi': Profile.objects.get(user=request.user).digi_list(),
-                       'quest': ['DemiVeemon', 'Gigimon', 'Tsunomon']})
+                       'quest': ['DemiVeemon', 'Gigimon', 'Tsunomon'], 'haveT':Profile.objects.get(user=request.user).haveT,
+                                                           'haveG':Profile.objects.get(user=request.user).haveG,
+                                                           'haveV':Profile.objects.get(user=request.user).haveV,})
 def my_digi(request):
     if request.method == 'POST':
         loggedUser = Profile.objects.get(user=request.user)
