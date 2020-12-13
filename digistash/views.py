@@ -55,5 +55,41 @@ def vote(request, question_id):
         return redirect('/digistash/all_digi', request)
 def all_digi(request):
     return render(request, 'digistash/all_digi.html', {'digimons':Digimon.objects.all()})
+def acq_digi(request):
+    try:
+        selected_choice = request.POST['choice']
+    except (KeyError, Choice.DoesNotExist):
+        # Redisplay the question voting form.
+        return render(request, 'digistash/acq_digi.html', {'usersDigi':Profile.objects.get(user=request.user).digi_list(),
+                                                        'quest':['DemiVeemon', 'Gigimon', 'Tsunomon']})
+    else:
+        print(request.user)
+        print(selected_choice)
+        print(selected_choice)
+        print(selected_choice)
+        digi = Digimon.objects.get(name=selected_choice)
+        print(digi)
+        prof = Profile.objects.get(user=request.user)
+        if prof.money>=digi.money_to_evolve and prof.meat>=digi.meat_to_evolve:
+            prof.digimons.add(digi)
+            prof.save()
+            return render(request, 'digistash/acq_digi.html',
+                          {'usersDigi': Profile.objects.get(user=request.user).digi_list(),
+                           'quest': ['DemiVeemon', 'Gigimon', 'Tsunomon'],
+                           'sc_msg': "Succsess!"})
+        else:
+            return render(request, 'digistash/acq_digi.html',
+                          {'usersDigi': Profile.objects.get(user=request.user).digi_list(),
+                           'quest': ['DemiVeemon', 'Gigimon', 'Tsunomon'],
+                           'er_msg': "You don't have enough money or meat!"})
+        print(prof.digimons.all())
+        print(prof.check_digi())
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return render(request, 'digistash/acq_digi.html',
+                      {'usersDigi': Profile.objects.get(user=request.user).digi_list(),
+                       'quest': ['DemiVeemon', 'Gigimon', 'Tsunomon']})
+
 
 

@@ -18,6 +18,10 @@ class Profile(models.Model):
             return True
         else:
             return False
-
+    def digi_list(self):
+        out=[]
+        for digimon in self.digimons.all():
+            out.append(digimon.name)
+        return out
     def __str__(self):
         return self.user.username

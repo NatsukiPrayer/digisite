@@ -18,7 +18,19 @@
                 <input class="hide" id={{ digimon.name }} type="checkbox" >
                 <label for={{ digimon.name }}>Click to know more</label>
                 {% with digimon.description as description %}
-                <div>{{ description }}</div>
+                <div>
+                    {{ digimon.name }}<br>
+                    {{ description }}
+                    {% if digimon.evolution %}
+                        <p>Evolves to {{ digimon.evolution }}</p>
+                    {% else %}
+                        <p>Not evolve</p>
+                    {% endif %}
+                    <p>Level: {{ digimon.level }}</p>
+                    <p>Type: {{ digimon.type }}</p>
+                    <p>Attribute: {{ digimon.attribute }}</p>
+                    <p>Attacks: {{ digimon.Attacks }}</p>
+                </div>
                  {% endwith %}
             </td>
         </tr>
